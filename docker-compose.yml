@@ -1,0 +1,12 @@
+services:
+  agent:
+    build: .
+    env_file: .env
+    volumes:
+      - ./personas:/app/personas:ro
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    environment:
+      - PERSONA=${PERSONA:-personas/sample.yaml}
+      - DB_PATH=/app/data/voice_agent.db

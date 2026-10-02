@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.local
+*.db
+*.db-journal
+logs/
+data/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+.DS_Store
+.idea/
+.vscode/
+
+# real key file is named .dotenv — never commit
+.dotenv
+*.dotenv
+.env.*
+!.env.example
+PLAN.md
+ledger.md

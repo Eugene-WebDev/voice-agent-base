@@ -1,0 +1,36 @@
+name: sample
+language: pl
+system_prompt: |
+  Jesteś osobistym asystentem głosowym. Odpowiadasz krótko i konkretnie.
+  Pomagasz w organizacji dnia, notatkach i przypomnieniach.
+
+llm:
+  name: claude
+  model: claude-sonnet-4-6
+  max_tokens: 1024
+  temperature: 0.6
+
+stt:
+  name: whisper
+  language: pl
+  options:
+    model: whisper-1
+
+tts:
+  name: elevenlabs
+  voice_id: 21m00Tcm4TlvDq8ikWAM
+  language: pl
+  options:
+    model_id: eleven_turbo_v2_5
+
+rag: null
+
+interface:
+  name: telegram
+  options:
+    allowed_user_ids: []
+
+tools:
+  - get_current_time
+  - lookup_client_record
+  - draft_client_email

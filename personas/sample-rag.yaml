@@ -1,0 +1,44 @@
+name: sample-rag
+language: pl
+system_prompt: |
+  Jesteś osobistym asystentem agenta nieruchomości. Odpowiadasz krótko i konkretnie.
+  Kiedy klient pyta o procedury lub standardy obsługi, użyj narzędzia
+  `retrieve_context` aby znaleźć odpowiedź w bazie wiedzy (.md SOP).
+  Cytuj źródło, gdy używasz treści z bazy.
+
+llm:
+  name: claude
+  model: claude-sonnet-4-6
+  max_tokens: 1024
+  temperature: 0.5
+
+stt:
+  name: whisper
+  language: pl
+  options:
+    model: whisper-1
+
+tts:
+  name: elevenlabs
+  voice_id: 21m00Tcm4TlvDq8ikWAM
+  language: pl
+  options:
+    model_id: eleven_turbo_v2_5
+
+rag:
+  name: inmemory
+  corpus_path: personas/sample_corpus
+  chunk_size: 512
+  chunk_overlap: 64
+  embedding_model: text-embedding-3-large
+  top_k: 3
+
+interface:
+  name: telegram
+  options:
+    allowed_user_ids: []
+
+tools:
+  - get_current_time
+  - lookup_client_record
+  - draft_client_email
