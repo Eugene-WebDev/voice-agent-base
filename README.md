@@ -233,3 +233,7 @@ Evaluated and deferred for now: PersonaPlex, Ghost.
 ## License
 
 Personal R&D, not yet open-sourced. Internal use.
+
+## Evals
+
+`evals/` holds a regression suite for the RAG persona: retrieval hit-rate, required-fact checks, refusal on out-of-scope questions, and an LLM-as-judge groundedness score, with thresholds that fail the run. See [`evals/README.md`](evals/README.md).

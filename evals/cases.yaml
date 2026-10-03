@@ -1,0 +1,68 @@
+# Eval cases for personas/sample-rag.yaml (real-estate assistant over personas/sample_corpus).
+# must_include: list of groups; EVERY group must match, any one alternative per group is enough
+#               (alternatives cover Polish/English phrasing). Case-insensitive.
+# must_not_include: strings that signal a fabricated answer.
+# expected_source: the SOP file retrieval must surface in top_k. null = question is NOT in the corpus.
+
+- id: confirm_before_viewing
+  question: "Ile czasu przed prezentacją mieszkania mam potwierdzić spotkanie z klientem?"
+  expected_source: sop-viewing.md
+  must_include: [["2 godzin", "dwie godziny", "2 hours", "2h"]]
+
+- id: room_order
+  question: "W jakiej kolejności oprowadzam klienta po pomieszczeniach?"
+  expected_source: sop-viewing.md
+  must_include: [["salon", "living room", "pokój dzienny"], ["kuchni", "kitchen"], ["balkon", "balcony"]]
+
+- id: blocker_question
+  question: "Jakie pytanie o blokery zadaję podczas prezentacji?"
+  expected_source: sop-viewing.md
+  must_include: [["stop you", "powstrzyma", "zatrzyma", "oferty dzisiaj", "offer today"]]
+
+- id: after_viewing_recap
+  question: "Co wysyłam klientowi po prezentacji i w jakim czasie?"
+  expected_source: sop-viewing.md
+  must_include: [["2 godzin", "2 hours", "dwóch godzin"], ["PDF"]]
+
+- id: comparables_timing
+  question: "Kiedy wysłać klientowi porównywalne oferty?"
+  expected_source: sop-followup.md
+  must_include: [["3", "trzeci", "48"]]
+
+- id: call_hours
+  question: "Czy mogę zadzwonić do klienta o 21:00?"
+  expected_source: sop-followup.md
+  must_include: [["nie", "no", "not"], ["20", "8pm", "8 pm", "ósmej"]]
+
+- id: max_unanswered_messages
+  question: "Ile wiadomości mogę wysłać, jeśli klient nie odpowiada?"
+  expected_source: sop-followup.md
+  must_include: [["2", "dwie", "two"]]
+
+- id: cold_after_day7
+  question: "Co robię, jeśli klient nie odpowiada do siódmego dnia?"
+  expected_source: sop-followup.md
+  must_include: [["cold", "zimn", "chłodn"]]
+
+- id: escalation_missed_callbacks
+  question: "Klient trzy razy z rzędu nie odebrał umówionego telefonu. Co dalej?"
+  expected_source: sop-followup.md
+  must_include: [["mail", "e-mail", "email"], ["cold", "zimn", "nie goń", "do not chase", "nie dzwoń"]]
+
+- id: no_pitch_first_call
+  question: "Czy przy pierwszym telefonie follow-up proponuję inne mieszkania?"
+  expected_source: sop-followup.md
+  must_include: [["nie", "no", "not"]]
+
+# --- NOT in the corpus: the assistant must say it doesn't know, not invent a number ---
+- id: oos_commission
+  question: "Jaka jest standardowa prowizja agenta od sprzedaży?"
+  expected_source: null
+  must_include: [["nie ma", "brak", "nie znalazłem", "nie znajduję", "not in", "nie zawiera", "nie wiem"]]
+  must_not_include: ["%"]
+
+- id: oos_mortgage_rate
+  question: "Jakie jest aktualne oprocentowanie kredytu hipotecznego?"
+  expected_source: null
+  must_include: [["nie ma", "brak", "nie znalazłem", "nie znajduję", "not in", "nie zawiera", "nie wiem"]]
+  must_not_include: ["%"]

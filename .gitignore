@@ -25,3 +25,6 @@ build/
 !.env.example
 PLAN.md
 ledger.md
+
+# eval run outputs (contain model answers)
+evals/results/
